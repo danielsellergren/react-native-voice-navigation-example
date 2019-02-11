@@ -39,6 +39,9 @@ buck-out
 # Watchman
 .watchmanconfig
 
+# iOS
+ios/build
+
 # Android
 .idea
 .gradle
