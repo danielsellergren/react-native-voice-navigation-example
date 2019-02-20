@@ -1,33 +1,28 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import withVoice from '../utilities/withVoice';
 
-export default class HomeScreen extends React.Component {
+class HomeScreen extends React.Component {
 
   constructor(props) {
     super(props);
+  }
 
-    this.state = {
-      started: '',
-      results: []
-    };
+  componentDidMount() {
   }
 
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>Welcome to React Native Voice!</Text>
-        <Text style={styles.stat}>{`Started: ${this.state.started}`}</Text>
-        <Text style={styles.stat}>{`Results: ${this.state.results}`}</Text>
-        <Button
-          onPress={this.startListening}
-          title="Voice"
-          color="#841584"
-          accessibilityLabel="Start Listening"
-        />
+        <Text style={styles.stat}>{`Started: ${this.props.started}`}</Text>
+        <Text style={styles.stat}>{`Results: ${this.props.totalResults}`}</Text>
       </View>
     );
   }
 }
+
+export default withVoice(HomeScreen);
 
 const styles = StyleSheet.create({
   container: {

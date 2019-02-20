@@ -7,9 +7,11 @@ const withVoice = (WrappedComponent) => {
     constructor(props) {
       super(props);
 
+      // Initial state
       this.state = {
-        started: '',
-        results: []
+        started: false,
+        results: [],
+        totalResults: []
       };
 
       // Bindings
@@ -19,24 +21,7 @@ const withVoice = (WrappedComponent) => {
 
     // Lifecycle
     componentDidMount() {
-      const didFocusSubscription = this.props.navigation.addListener(
-        'didFocus',
-        payload => {
-          console.log("didFocus");
-          // this._startRecognizing();
-          console.debug('didBlur', payload);
-        }
-      );
-
-      const willBlurSubscription = this.props.navigation.addListener(
-        'willBlur',
-        payload => {
-          console.log("willBlur");
-          // this._destroyRecognizer();
-          Voice.destroy().then(Voice.removeAllListeners);
-          console.debug('willBlur', payload);
-        }
-      );
+      this._startRecognizing();
     }
 
     componentWillUnmount() {
@@ -51,21 +36,27 @@ const withVoice = (WrappedComponent) => {
     }
 
     onSpeechPartialResults(e) {
-      let speech = e.value[0].toLowerCase();
+      let speech = e.value[0].toLowerCase().split(" ").slice(-1)[0];
 
       if (speech.includes("next")) {
-        this.props.navigation.navigate('Step1', {});
-        this._stopRecognizing();
-
+        this.props.navigation.navigate('Other', {});
+        this.setState({
+          results: '',
+          totalResults: e.value
+        });
+      } else if (speech.includes("back")) {
+        this.props.navigation.navigate('Home', {});
+        this.setState({
+          results: '',
+          totalResults: e.value
+        });
       }
-      this.setState({
-        results: e.value,
-      });
     }
 
     // Voice
     async _startRecognizing(e) {
       this.setState({
+        started: true,
         results: []
       });
 
@@ -80,6 +71,9 @@ const withVoice = (WrappedComponent) => {
       return (
         <WrappedComponent
           {...this.props}
+          started = {this.state.started}
+          results = {this.state.results}
+          totalResults = {this.state.totalResults}
         />
       );
     }

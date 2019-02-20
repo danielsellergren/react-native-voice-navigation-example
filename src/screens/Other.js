@@ -1,21 +1,20 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import withVoice from '../utilities/withVoice';
 
-export default class OtherScreen extends React.Component {
+class OtherScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>Other screen!</Text>
-        <Button
-          onPress={this.startListening}
-          title="Voice"
-          color="#841584"
-          accessibilityLabel="Start Listening"
-        />
+        <Text style={styles.stat}>{`Started: ${this.props.started}`}</Text>
+        <Text style={styles.stat}>{`Results: ${this.props.results}`}</Text>
       </View>
     );
   }
 }
+
+export default withVoice(OtherScreen);
 
 const styles = StyleSheet.create({
   container: {
