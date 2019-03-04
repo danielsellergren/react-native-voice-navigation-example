@@ -165,7 +165,7 @@ We have to specify in the iOS configuration that we want access to both the micr
 ## Resources
 
 * [React Native - Getting Started](https://facebook.github.io/react-native/docs/getting-started)
-* [Why not Expo?][https://docs.expo.io/versions/v31.0.0/introduction/why-not-expo/]
+* [Why not Expo?](https://docs.expo.io/versions/v31.0.0/introduction/why-not-expo/)
 * [Very simple higher order component example](https://gist.github.com/sebmarkbage/ef0bf1f338a7182b6775)
 * [What is the difference between a HOC and a container component in ReactJS?](https://www.quora.com/What-is-the-difference-between-a-HOC-and-a-container-component-in-ReactJS)
 * [Higher-Order Components](https://reactjs.org/docs/higher-order-components.html)
